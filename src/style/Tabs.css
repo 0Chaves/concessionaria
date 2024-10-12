@@ -1,0 +1,19 @@
+.Tabs{
+    list-style: none;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    padding-left: 0;
+}
+.Tabs :hover{
+    border: 1px solid red;
+    cursor: pointer;
+    transition:ease-out 0.6s;
+}
+
+.Tabs li {
+    width: 33%;
+    padding: 0.6em;
+    font-weight: bold;
+    border: 1px solid transparent;
+}
