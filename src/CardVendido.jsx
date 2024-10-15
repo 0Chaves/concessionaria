@@ -1,6 +1,7 @@
 import car_image from './img/car_lowpoly.jpg'
 
-const CardVendido = ({veiculo}) =>{
+const CardVendido = ({veiculo, removerVendido}) =>{
+
     return(
         <>
         <div className='card'>
@@ -15,10 +16,11 @@ const CardVendido = ({veiculo}) =>{
                 </div>
                 <div>
                     <p>Comprador</p>
-                    <p><strong>Nome: </strong> nome_cliente</p>
-                    <p><strong>CPF: </strong> cpf_cliente</p>
+                    <p><strong>Nome: </strong> {veiculo.cliente_nome}</p>
+                    <p><strong>CPF: </strong> {veiculo.cliente_cpf}</p>
                 </div>
             </div>
+            <button onClick={()=> removerVendido(veiculo.id)}>Remover</button>
         </div>
         </>
     )

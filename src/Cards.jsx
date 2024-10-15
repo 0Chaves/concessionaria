@@ -6,9 +6,11 @@ import Venda from './Venda'
 const Cards = ({estoque, removerVeiculo, addVendidos}) =>{
 
     const [vendaVisivel, setVendaVisivel] = useState(false)
+    const [vendaId, setVendaId] = useState('')
 
-    const toggleVenda = () => {
+    const toggleVenda = (id) => {
         setVendaVisivel(vendaVisivel => !vendaVisivel)
+        setVendaId(id)
     }
 
     return(
@@ -18,7 +20,7 @@ const Cards = ({estoque, removerVeiculo, addVendidos}) =>{
                 return(
                     <>
                     <div key={veiculo.id} className='cardMaior'>
-                        <div className={`card ${vendaVisivel? 'blur' : ''}`}>
+                        <div className={`card ${vendaVisivel && (vendaId==veiculo.id)? 'blur' : ''}`}>
                             <img src={car_image} alt="" />
                             <div>
                                 <p><strong>Marca: </strong>{veiculo.marca}</p>
@@ -28,10 +30,12 @@ const Cards = ({estoque, removerVeiculo, addVendidos}) =>{
                             </div>
                             <div className='remove-sell'>
                                 <button onClick={()=>removerVeiculo(veiculo.id)}>Remover</button>
-                                <button onClick={()=>toggleVenda()}>Vender</button>
+                                <button onClick={()=>{
+                                    vendaVisivel && (vendaId != veiculo.id) ? setVendaId(veiculo.id) : toggleVenda(veiculo.id)
+                                }}>Vender</button>
                             </div>
                         </div>
-                        {vendaVisivel ? <Venda addVendidos={addVendidos} id={veiculo.id}/> : null}
+                        {vendaVisivel && (vendaId==veiculo.id) ? <Venda addVendidos={addVendidos} id={veiculo.id}/> : null}
                     </div>
                     </>
                 )

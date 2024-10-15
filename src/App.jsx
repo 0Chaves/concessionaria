@@ -19,10 +19,12 @@ function App() {
 
   const [ListVendidos,setListVendidos] = useState([])
 
-  //const [clientes, setClientes] = useState([])
+  const removerVendido = (id) => {
+    setListVendidos(ListVendidos.filter(veiculo=>veiculo.id != id))
+  }
 
   const addVendidos = (id,cliente) =>{
-    setListVendidos([...ListVendidos, ...estoque.filter(veiculo => veiculo.id == id)])
+    setListVendidos([...ListVendidos, {...estoque.filter(veiculo => veiculo.id == id), cliente_nome: cliente.nome, cliente_cpf: cliente.cpf}])
     removerVeiculo(id)
   }
 
@@ -30,8 +32,7 @@ function App() {
     <>
       <h1>Estoque concessionária</h1>
       <FormAddNovo addEstoque={addEstoque}/>
-      <Tabs estoque={estoque} removerVeiculo={removerVeiculo} addVendidos={addVendidos} ListVendidos={ListVendidos}/>
-      
+      <Tabs estoque={estoque} removerVeiculo={removerVeiculo} addVendidos={addVendidos} ListVendidos={ListVendidos} removerVendido={removerVendido}/>
     </>
   )
 }
